@@ -6,7 +6,9 @@ from .pixel_shuffler import PixelShuffler
 from .custom_layers.scale_layer import Scale
 from .custom_inits.icnr_initializer import icnr_keras
 import tensorflow.compat.v1 as tf
-import keras.backend as K
+# import keras.backend as K
+from tensorflow.compat.v1.keras import backend as K
+from tensorflow.compat.v1.keras import regularizers
 
 # initializers and weight decay regularization are fixed
 conv_init = 'he_normal'

@@ -148,6 +148,10 @@ class VideoConverter(object):
             try:
                 # get detected face
                 det_face_im = input_img[int(x0):int(x1),int(y0):int(y1),:]
+                print("input_img:")
+                print(input_img)
+                print("det_face_im")
+                print(det_face_im)
 
                 # get src/tar landmarks
                 src_landmarks = get_src_landmarks(x0, x1, y0, y1, lms)

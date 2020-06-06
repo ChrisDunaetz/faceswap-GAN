@@ -194,7 +194,7 @@ class Network(object):
                     dim *= int(d)
                 feed_in = tf.reshape(inp, [-1, dim])
             else:
-                feed_in, dim = (inp, input_shape[-1].value)
+                feed_in, dim = (inp, input_shape[-1])
             weights = self.make_var('weights', shape=[dim, num_out])
             biases = self.make_var('biases', [num_out])
             op = tf.nn.relu_layer if relu else tf.nn.xw_plus_b

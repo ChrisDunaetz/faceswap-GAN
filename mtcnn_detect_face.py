@@ -31,7 +31,7 @@ from __future__ import print_function
 from six import string_types, iteritems
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 #from math import floor
 import cv2
 import os
@@ -71,6 +71,7 @@ class Network(object):
         self.layers = dict(inputs)
         # If true, the resulting variables are set as trainable
         self.trainable = trainable
+        tf.disable_eager_execution()
 
         self.setup()
 
@@ -217,6 +218,7 @@ class Network(object):
     
 class PNet(Network):
     def setup(self):
+        tf.disable_eager_execution()
         (self.feed('data') #pylint: disable=no-value-for-parameter, no-member
              .conv(3, 3, 10, 1, 1, padding='VALID', relu=False, name='conv1')
              .prelu(name='PReLU1')
@@ -233,6 +235,7 @@ class PNet(Network):
         
 class RNet(Network):
     def setup(self):
+        tf.disable_eager_execution()
         (self.feed('data') #pylint: disable=no-value-for-parameter, no-member
              .conv(3, 3, 28, 1, 1, padding='VALID', relu=False, name='conv1')
              .prelu(name='prelu1')
@@ -252,6 +255,7 @@ class RNet(Network):
 
 class ONet(Network):
     def setup(self):
+        tf.disable_eager_execution()
         (self.feed('data') #pylint: disable=no-value-for-parameter, no-member
              .conv(3, 3, 32, 1, 1, padding='VALID', relu=False, name='conv1')
              .prelu(name='prelu1')
@@ -276,6 +280,7 @@ class ONet(Network):
              .fc(10, relu=False, name='conv6-3'))
 
 def create_mtcnn(sess, model_path):
+    tf.disable_eager_execution()
     if not model_path:
         model_path,_ = os.path.split(os.path.realpath(__file__))
 

@@ -19,6 +19,8 @@ class MTCNNFaceDetector():
         self.create_mtcnn(sess, model_path)
         
     def create_mtcnn(self, sess, model_path):
+        tf.disable_eager_execution()
+        
         if not model_path:
             model_path, _ = os.path.split(os.path.realpath(__file__))
 

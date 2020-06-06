@@ -1,6 +1,6 @@
 import mtcnn_detect_face
 import tensorflow as tf
-from keras import backend as K
+from tensorflow.compat.v1.keras import backend as K
 import numpy as np
 import cv2
 import os
@@ -22,15 +22,15 @@ class MTCNNFaceDetector():
         if not model_path:
             model_path, _ = os.path.split(os.path.realpath(__file__))
 
-        with tf.variable_scope('pnet'):
+        with tf.compat.v1.variable_scope('pnet'):
             data = tf.placeholder(tf.float32, (None,None,None,3), 'input')
             pnet = mtcnn_detect_face.PNet({'data':data})
             pnet.load(os.path.join(model_path, 'det1.npy'), sess)
-        with tf.variable_scope('rnet'):
+        with tf.compat.v1.variable_scope('rnet'):
             data = tf.placeholder(tf.float32, (None,24,24,3), 'input')
             rnet = mtcnn_detect_face.RNet({'data':data})
             rnet.load(os.path.join(model_path, 'det2.npy'), sess)
-        with tf.variable_scope('onet'):
+        with tf.compat.v1.variable_scope('onet'):
             data = tf.placeholder(tf.float32, (None,48,48,3), 'input')
             onet = mtcnn_detect_face.ONet({'data':data})
             onet.load(os.path.join(model_path, 'det3.npy'), sess)

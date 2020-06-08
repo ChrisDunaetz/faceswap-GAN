@@ -148,8 +148,8 @@ class VideoConverter(object):
             try:
                 # get detected face
                 # det_face_im = input_img[int(x0):int(x1),int(y0):int(y1),:]
-                det_face_im = input_img[0,int(x0):int(x1),int(y0):int(y1),:]
-                
+                det_face_im = input_img[0,int(y0):int(y1),:]
+
                 # print("input_img:")
                 # print(input_img)
                 # print("det_face_im")

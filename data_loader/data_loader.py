@@ -55,7 +55,6 @@ class DataLoader(object):
                 ), 
                 batch_size=batch_size,
                 num_parallel_batches=self.num_cpus, # cpu cores
-                drop_remainder=True
             )
         )
         dataset = dataset.repeat()
